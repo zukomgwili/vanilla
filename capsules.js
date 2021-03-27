@@ -20,7 +20,7 @@ export class Capsules extends HTMLElement {
     }
 
     static get html(){
-        return "<x-capsules></x-capsules>";
+        return "<v-capsules></v-capsules>";
     }
 };
-customElements.define('x-capsules', Capsules);
+customElements.define('v-capsules', Capsules);
