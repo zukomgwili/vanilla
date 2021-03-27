@@ -1,13 +1,5 @@
 import { readFile, createTemplate } from "./utils.js";
 
-const app = window.app = window.app || {};
-app.capsule = {
-    showDetail: (element) =>{
-        const event = new Event('detail');
-        element.dispatchEvent(event);    
-    }
-}
-
 class Capsule extends HTMLElement {
     constructor() {
         super();
@@ -23,12 +15,13 @@ class Capsule extends HTMLElement {
         };
         const content = createTemplate(css, html, data);
         this.shadowRoot.innerHTML = content;
-        this.shadowRoot.querySelector('h1').addEventListener('detail', this.showDetail);
+        this.h1 = this.shadowRoot.querySelector('h1');
+        this.h1.addEventListener('click', this.showDetail);
 
     }
 
     disconnectedCallback() {
-        this.removeEventListener('detail', this.showDetail);
+        this.h1.addEventListener('click', this.showDetail);
     }
 
     showDetail() {
