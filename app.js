@@ -1,4 +1,4 @@
-import { Capsules } from "./x-capsules.js";
+import { Capsules } from "./capsules.js";
 class App extends HTMLElement {
     constructor() {
         super();

@@ -1,5 +1,5 @@
 import "./utils.js"
 import "./capsule.js";
-import "./x-capsules.js";
+import "./capsules.js";
 import "./app.js";
 
