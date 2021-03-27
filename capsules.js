@@ -5,21 +5,18 @@ export class Capsules extends HTMLElement {
         this.attachShadow({ mode: 'open' });
     }
 
-    connectedCallback() {
-        fetch('https://api.spacexdata.com/v3/capsules/upcoming')
-            .then(({ body }) => body)
-            .then(stream => new Response(stream, { headers: { "Content-Type": "application/json" } }).json())
-            .then(capsules => {
-                let html = "";
-                capsules.forEach(capsule => {
-                    const { capsule_serial, details } = capsule;
-                    html += Capsule.getHtml({ serial: capsule_serial, details: details});
-                });
-                this.shadowRoot.innerHTML = html;
-            });
+    async connectedCallback() {
+        const { body } = await fetch('https://api.spacexdata.com/v3/capsules/upcoming');
+        const capsules = await new Response(body, { headers: { "Content-Type": "application/json" } }).json();
+        let html = "";
+        capsules.forEach(capsule => {
+            const { capsule_serial, details } = capsule;
+            html += Capsule.getHtml({ serial: capsule_serial, details: details });
+        });
+        this.shadowRoot.innerHTML = html;
     }
 
-    static get html(){
+    static get html() {
         return "<v-capsules></v-capsules>";
     }
 };
