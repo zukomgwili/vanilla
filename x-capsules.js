@@ -1,3 +1,4 @@
+import { Capsule } from "./capsule.js";
 export class Capsules extends HTMLElement {
     constructor() {
         super();
@@ -12,7 +13,7 @@ export class Capsules extends HTMLElement {
                 let html = "";
                 capsules.forEach(capsule => {
                     const { capsule_serial, details } = capsule;
-                    html += `<x-capsule serial="${capsule_serial}" details="${details}"></x-capsule>`;
+                    html += Capsule.getHtml({ serial: capsule_serial, details: details});
                 });
                 this.shadowRoot.innerHTML = html;
             });

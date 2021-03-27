@@ -1,14 +1,14 @@
 import { readFile, createTemplate } from "./utils.js";
 
-class Capsule extends HTMLElement {
+export class Capsule extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
     }
 
     async connectedCallback() {
-        const css = await readFile("./x-capsule.css");
-        const html = await readFile("./x-capsule.html");
+        const css = await readFile("./capsule.css");
+        const html = await readFile("./capsule.html");
         const data = {
             'serial': this.getAttribute('serial'),
             'details': this.getAttribute('details')
@@ -28,7 +28,11 @@ class Capsule extends HTMLElement {
         console.log("Hello!!")
     }
 
+    static getHtml({serial, details}){
+        return `<v-capsule serial="${serial}" details="${details}"></v-capsule>`;
+    }
+
 }
 
-customElements.define('x-capsule', Capsule);
+customElements.define('v-capsule', Capsule);
 
